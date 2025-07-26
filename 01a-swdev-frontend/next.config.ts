@@ -5,8 +5,8 @@ const repoName = '01a-swdev-frontend';
 
 const nextConfig: NextConfig = {
   output: 'export',
-  basePath: isProd ? `/${repoName}/out` : '',
-  assetPrefix: isProd ? `/${repoName}/out` : '',
+  basePath: '',
+  assetPrefix: '',
 };
 
 export default nextConfig;
