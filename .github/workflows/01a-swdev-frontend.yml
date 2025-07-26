@@ -7,6 +7,10 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 01a-swdev-frontend
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -22,11 +26,13 @@ jobs:
       - name: Build and export
         run: |
           npm run build
-          npm run export
           touch out/.nojekyll
+
+      - name: Install rsync
+        run: sudo apt-get update && sudo apt-get install -y rsync
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: out
+          folder: 01a-swdev-frontend/out
