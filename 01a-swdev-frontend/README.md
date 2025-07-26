@@ -5,17 +5,15 @@
 
 ## Live Demo
 
-**GitHub Pages URL:** [https://miika.github.io/test-ictconscript-admission/](https://miika.github.io/test-ictconscript-admission/)
+**GitHub Pages URL:** [https://miikatu.github.io/test-ictconscript-admission/](https://miikatu.github.io/test-ictconscript-admission/)
 
 ---
 
 ## 🧭 Features
 
-| ID  | Feature Description                                                                                         |
-|-----|-------------------------------------------------------------------------------------------------------------|
-| F-1 | Displays log entries in reverse chronological order (newest first).                                         |
-| F-2 | Allows users to add title, body, and optional location (latitude and longitude) through a modal.           |
-| F-3 | New entries appear instantly upon submission without needing a refresh.                                    |
+- [x] Displays log entries in reverse chronological order (newest first).
+- [x] Allows users to add title, body, and optional location (latitude and longitude) through a modal. 
+- [x] New entries appear instantly upon submission without needing a refresh.       
 
 ---
 
