@@ -7,29 +7,43 @@ import { Modal } from "./ui/Modal";
 import { useState } from "react";
 import data from "../../sample-data/data.json"
 
-const formatCoordinates = (lat: number, lon: number) => {
-  if (lat && lon)
+const formatCoordinates = (lat?: number | null, lon? : number | null) => {
+  if (typeof lat == "number" && typeof lon == "number"){
+    console.log("---------- formating worksd");
     return `${lat.toFixed(4)}°N, ${lon.toFixed(4)}°E`
+  }
 }
 
-
-
+type Entry = {
+  id: string ;
+  title: string;
+  body?: string;
+  isoTime: string;
+  lat?: number | null;
+  lon?: number | null;
+};
 
 export default function LogoBook() {
-  const [isModalOpen,setModalOpen] = useState(false);
-  const [entryData,setEntryData] = useState(data);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [entryData, setEntryData] = useState<Entry[]>(data);
+  const [isNewestFirst, setIsNewestFirst] = useState(true);
 
+  const handleSubmit = (data: { title: string; body: string; lat?: number; lon?: number }) => {
+    const newEntryWithMeta: Entry = {
+      ...data,
+      id: (entryData.length + 1).toString(),
+      isoTime: new Date().toISOString(),
+    };
 
-const handleSubmit = (data: { title: string; description: string; lat?: number; lon?: number }) => {
-  const newEntryWithMeta = {
-    ...data,
-    id: entryData.length + 1,
-    isoTime: new Date().toISOString()
+    setEntryData(prev => [...prev, newEntryWithMeta]);
+    setModalOpen(false);
   };
 
-  setEntryData(prev => [...prev, newEntryWithMeta]);
-  setModalOpen(false); // close modal after submit
-};
+  const compareOrder = (a:Entry,b:Entry)=> {
+    return isNewestFirst 
+      ? new Date(b.isoTime).getTime() - new Date(a.isoTime).getTime()
+      : new Date(a.isoTime).getTime() - new Date(b.isoTime).getTime()
+  }
 
   return (
 
@@ -42,7 +56,9 @@ const handleSubmit = (data: { title: string; description: string; lat?: number; 
             <p className="text-gray-600">Field Operations Daily Log</p>
           </div>
           <Button onClick={() => setModalOpen(true)} className=" bg-green-700 hover:bg-green-800">+ Add Entry</Button>
+          
         </div>
+        <Button onClick={()=>setIsNewestFirst(prev => !prev)} className=" text-gray-600 hover:text-gray-900"> ⇅: {isNewestFirst? "Newest First" : "Oldest First"}</Button>
         {isModalOpen && (
           <div className="inset-0 flex items-center justify-center bg-gray-100">
           <Modal onClose={() => setModalOpen(false)} onSubmit={handleSubmit}  />
@@ -53,7 +69,9 @@ const handleSubmit = (data: { title: string; description: string; lat?: number; 
         )}
         
         <div className="space-y-4">
-          {data.map((entry) => (
+          {entryData
+          .slice().sort(compareOrder)
+          .map((entry) => (
             <div key={entry.id} className="bg-white rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-md transition-shadow">
               <div  className="pb-3 flex flex-col space-y-1.5 p-6">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
