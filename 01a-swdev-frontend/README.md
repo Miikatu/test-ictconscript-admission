@@ -20,6 +20,7 @@
 ## 🛠️ Tech Stack
 
 - **Framework**: Next.js 
+- **Language**: TypeScript
 - **Styling**: Tailwind 
 - **Deployment**: GitHub Actions → GitHub Pages
 ---
