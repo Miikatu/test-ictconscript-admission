@@ -1,12 +1,14 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from fastapi import HTTPException
+import logging
 
 from app.schemas import LogEntryCreate
 from app.database import create_db_and_tables
 from app.crud import *
 
-app = FastAPI()
+logging.basicConfig(level=logging.DEBUG)
+app = FastAPI(docs_url="/docs")
 
 create_db_and_tables()
 

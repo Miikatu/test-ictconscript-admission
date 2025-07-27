@@ -13,7 +13,7 @@ def get_entry(entry_id: int):
 
 def create_entry(data):
     with Session(engine) as session:
-        entry = LogEntry(**data.dict(), isoTime=datetime.utcnow().isoformat())
+        entry= LogEntry(**data.dict())
         session.add(entry)
         session.commit()
         session.refresh(entry)
