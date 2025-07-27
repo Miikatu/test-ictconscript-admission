@@ -3,18 +3,28 @@
 import Image from "next/image";
 import { format } from "date-fns";
 import { Button } from "./components/Button";
-import { Modal } from "./ui/Modal";
+
 import { useEffect, useState } from "react";
 import { MapPin, Map } from 'lucide-react';
 import data from "../../sample-data/data.json"
-import { MapModal } from "./components/MapModal";
+import dynamic from "next/dynamic";
 
-const formatCoordinates = (lat?: number | null, lon?: number | null) => {
-  if (typeof lat == "number" && typeof lon == "number") {
-    console.log("---------- formating worksd");
-    return `${lat.toFixed(4)}°N, ${lon.toFixed(4)}°E`
+//Dynamic imports to avoid Error: window is not defined
+const MapModal = dynamic(() =>
+  import('./components/MapModal').then(mod => mod.MapModal),
+  {
+    ssr: false,
+    loading: () => <p>Loading map...</p>,
   }
-}
+);
+
+const Modal = dynamic(() =>
+  import('./ui/Modal').then(mod => mod.Modal),
+  {
+    ssr: false,
+    loading: () => <p>Loading modal...</p>,
+  }
+);
 
 type Entry = {
   id: string;
@@ -24,13 +34,20 @@ type Entry = {
   lat?: number | null;
   lon?: number | null;
 };
+const formatCoordinates = (lat?: number | null, lon?: number | null) => {
+  if (typeof lat == "number" && typeof lon == "number") {
+    console.log("---------- formating worksd");
+    return `${lat.toFixed(4)}°N, ${lon.toFixed(4)}°E`
+  }
+}
 
 export default function LogoBook() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [entryData, setEntryData] = useState<Entry[]>(data);
   const [isNewestFirst, setIsNewestFirst] = useState(true);
   const [showMapModal, setShowMapModal] = useState(false);
-  const [mapCoords, setMapCoords] = useState({ lat: null, lon: null });
+  const [mapCoords, setMapCoords] = useState<{ lat?: number | null; lon?: number | null}>({});
+
 
 
   useEffect(() => {
@@ -46,7 +63,7 @@ export default function LogoBook() {
   }, [showMapModal]);
 
 
-  const handleShowMap = (lat: number, lon: number) => {
+  const handleShowMap = (lat?: number | null, lon?: number | null) => {
     setMapCoords({ lat, lon });
     setShowMapModal(true);
   };

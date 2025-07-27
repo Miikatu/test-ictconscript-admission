@@ -9,8 +9,9 @@ type ModalProps = {
 export function Modal({ onClose, onSubmit }: ModalProps) {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
-    const [lat, setLat] = useState("");
-    const [lon, setLon] = useState("");
+    const [lat, setLat] = useState<string>("");
+    const [lon, setLon] = useState<string>("");
+
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -29,8 +30,8 @@ export function Modal({ onClose, onSubmit }: ModalProps) {
 
     const handleMapClick=(lat? :number,lng?: number)=>{
         console.log("-----latlon")
-        setLat(lat);
-        setLon(lng);
+        if (lat !== undefined) setLat(lat.toString());
+        if (lng !== undefined) setLon(lng.toString());
     }
 
     return (
