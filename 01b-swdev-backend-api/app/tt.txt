@@ -1,0 +1,11 @@
+your-app/
+├──app/
+    ├── models.py
+    ├── database.py
+    ├── crud.py
+    ├── schemas.py
+    ├── sample-data/
+    │   └── data.json
+├── main.py
+├── requirements.txt
+├── Dockerfile
