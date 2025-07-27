@@ -2,7 +2,7 @@
 # 📘 ICT Conscript Admission Backend
 
 
-**Swagger UI Demo:** [https://01b-swdev-backend-api.vercel.app/docshttps://01b-swdev-backend-api.vercel.app/docs](https://01b-swdev-backend-api.vercel.app/docshttps://01b-swdev-backend-api.vercel.app/docs)
+**Swagger UI Demo:** [https://01b-swdev-backend-api.vercel.app/docs](https://01b-swdev-backend-api.vercel.app/docs)
 
 
 ---
