@@ -36,7 +36,6 @@ type Entry = {
 };
 const formatCoordinates = (lat?: number | null, lon?: number | null) => {
   if (typeof lat == "number" && typeof lon == "number") {
-    console.log("---------- formating worksd");
     return `${lat.toFixed(4)}°N, ${lon.toFixed(4)}°E`
   }
 }
@@ -87,7 +86,6 @@ export default function LogoBook() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8 max-w-6xl">
-        {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
           <div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Platoon Logbook</h1>

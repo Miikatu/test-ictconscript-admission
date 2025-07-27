@@ -10,7 +10,7 @@ const iconMarkup = renderToStaticMarkup(<Disc2  className="text-red-800 " size={
 
 const lucideIcon = L.divIcon({
   html: iconMarkup,
-  className: '', // optional: remove default styles
+  className: '',
   iconSize: [32, 32],
   popupAnchor: [0, -16],
 })

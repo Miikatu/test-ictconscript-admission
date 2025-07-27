@@ -29,7 +29,6 @@ export function Modal({ onClose, onSubmit }: ModalProps) {
     };
 
     const handleMapClick=(lat? :number,lng?: number)=>{
-        console.log("-----latlon")
         if (lat !== undefined) setLat(lat.toString());
         if (lng !== undefined) setLon(lng.toString());
     }
